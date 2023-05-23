@@ -495,8 +495,8 @@ struct arguments Sampler(char beg[100], char csr[100], int n_blocks,
 
   int deviceCount;
   HRR(cudaGetDeviceCount(&deviceCount));
-  // printf("My rank: %d, totaldevice: %d\n", rank,deviceCount);
-  // HRR(cudaSetDevice(rank%deviceCount));
+  printf("My rank: %d, totaldevice: %d\n", rank,deviceCount);
+  HRR(cudaSetDevice(rank%deviceCount));
   // cout<<"Max allocatable Blocks:"<<numBlocks<<"\n";
   int *d_node_list;
   int *d_edge_list;

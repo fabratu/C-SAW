@@ -25,10 +25,10 @@ int main(int argc, char *argv[])
     int FrontierSize = atoi(argv[7]);
     int NeighborSize = atoi(argv[8]);
     int Depth= atoi(argv[9]);
-    int total_GPU = atoi(argv[10]);
+    //int total_GPU = atoi(argv[10]);
     
     // MPI_Status status;
-    int myrank = 0;
+    int myrank = atoi(argv[10]);
     double global_max_time, global_min_time;
     int global_sampled_edges;
     struct arguments args;
