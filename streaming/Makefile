@@ -17,10 +17,10 @@ deps	= $(wildcard ./*.cuh) \
 	$(cucc) -c $(cuflags) $< -o $@
 
 %.o:%.cpp $(deps)
-	$(cc) -c  $< -o $@
+	$(cucc) -c  $< -o $@
 
 $(exe):$(objs)
-	$(cc) $(objs) $(commflags) -O3 -o $(exe)
+	$(cucc) $(objs) $(commflags) -O3 -o $(exe)
 
 
 test:$(exe)	
