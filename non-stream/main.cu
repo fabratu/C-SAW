@@ -283,22 +283,22 @@ struct arguments Sampler(char beg[100], char csr[100],int n_blocks, int n_thread
 		check_layer<<<n_blocks, n_threads>>>(sampler, ggraph, d_state, n_subgraph, FrontierSize, NeighborSize, Depth);
 	}
 	HRR(cudaDeviceSynchronize());
-	// HRR(cudaMemcpy(host_counter, sampler->sampled_count, sizeof(int), cudaMemcpyDeviceToHost));	
+	HRR(cudaMemcpy(host_counter, sampler->sampled_count, sizeof(int), cudaMemcpyDeviceToHost));	
 	
-	// int total_count=0;
-	// for(int i=0; i < n_subgraph;i++){
-	// 	int count= S.samples[i].start[0];
-	// printf("Sampled: %d\n",host_counter[0]);
-	// 	total_count+=count;
-	// }
+	int total_count=0;
+	for(int i=0; i < n_subgraph;i++){
+		int count= S.samples[i].start[0];
+	printf("Sampled: %d\n",host_counter[0]);
+		total_count+=count;
+	}
 	total_time= wtime()-start_time;
-	// printf("%s,SamplingTime:%.6f\n",argv[1],total_time);
+	printf("%s,SamplingTime:%.6f\n",argv[1],total_time);
 	// Copy the sampled graph to CPU
 	/*
 	 	The sampled graph is stored as edge list. To get the samples in the CPU memory, copy each array from class Si to CPU allocated memory.
 	 */
-	// printf("Sampled edges:%d\n",host_counter[0]);	
-	// args.sampled_edges=host_counter[0];
+	printf("Sampled edges:%d\n",host_counter[0]);	
+	args.sampled_edges=host_counter[0];
 	args.time=total_time; 
 	return args;
 }
