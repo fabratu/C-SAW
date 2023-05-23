@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <mpi.h>
+//#include <mpi.h>
 #include "sampler.cuh"
 #include <stdlib.h>
 #include <assert.h>
@@ -27,23 +27,25 @@ int main(int argc, char *argv[])
     int Depth= atoi(argv[9]);
     int total_GPU = atoi(argv[10]);
     
-    MPI_Status status;
-    int myrank;
+    // MPI_Status status;
+    int myrank = 0;
     double global_max_time, global_min_time;
     int global_sampled_edges;
     struct arguments args;
-    MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &myrank); 
+    // MPI_Init(&argc, &argv);
+    // MPI_Comm_rank(MPI_COMM_WORLD, &myrank); 
     int global_sum;
     //SampleSize = SampleSize/total_GPU;
    args=Sampler(argv[2],argv[3], n_blocks, n_threads, n_subgraph, FrontierSize, NeighborSize, Depth, args, myrank); 
-    MPI_Reduce(&args.time, &global_max_time, 1, MPI_DOUBLE,MPI_MAX, 0, MPI_COMM_WORLD);
-    MPI_Reduce(&args.time, &global_min_time, 1, MPI_DOUBLE,MPI_MIN, 0, MPI_COMM_WORLD);
-    float rate = global_sampled_edges/global_max_time/1000000;
+    // MPI_Reduce(&args.time, &global_max_time, 1, MPI_DOUBLE,MPI_MAX, 0, MPI_COMM_WORLD);
+    // MPI_Reduce(&args.time, &global_min_time, 1, MPI_DOUBLE,MPI_MIN, 0, MPI_COMM_WORLD);
+    // float rate = global_sampled_edges/global_max_time/1000000;
+    float rate = args.sampled_edges/args.time/1000000;
     if(myrank==0)
     {
-        printf("%s,%f,%f\n",argv[1],global_min_time,global_max_time);
+        // printf("%s,%f,%f\n",argv[1],global_min_time,global_max_time);
+        printf("%s,%f,%f\n",argv[1],args.sampled_edges,args.time);
     }
-    MPI_Finalize();
+    // MPI_Finalize();
    return 0;
 }
