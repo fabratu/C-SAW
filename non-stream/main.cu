@@ -283,7 +283,9 @@ struct arguments Sampler(char beg[100], char csr[100],int n_blocks, int n_thread
 		printf("Layer call\n");
 		check_layer<<<n_blocks, n_threads>>>(sampler, ggraph, d_state, n_subgraph, FrontierSize, NeighborSize, Depth);
 	}
+	printf("2: Can I reach this line?");
 	HRR(cudaDeviceSynchronize());
+	printf("3: Can I reach this line?");
 	HRR(cudaMemcpy(host_counter, sampler->sampled_count, sizeof(int), cudaMemcpyDeviceToHost));	
 	
 	int total_count=0;
@@ -291,6 +293,7 @@ struct arguments Sampler(char beg[100], char csr[100],int n_blocks, int n_thread
 		int count= S.samples[i].start[0];
 		total_count+=count;
 	}
+	printf("4: Can I reach this line?");
 	total_time= wtime()-start_time;
 
 	// Copy the sampled graph to CPU
@@ -301,5 +304,6 @@ struct arguments Sampler(char beg[100], char csr[100],int n_blocks, int n_thread
 	args.sampled_edges = 0;
 	//args.sampled_edges=host_counter[0];
 	args.time=total_time; 
+	printf("5: Can I reach this line?");
 	return args;
 }
