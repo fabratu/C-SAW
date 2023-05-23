@@ -62,7 +62,7 @@ check(Sampling *S, gpu_graph G,curandState *global_state,int n_subgraph, int Fro
 		int SampleID= S->candidate.instance_ID[sourceIndex];
 		int NL= G.degree_list[source];
 		//#ifdef profile
-		if(warpTid==0){printf(" Source: %d, len: %d\n",source,NL);}
+		//if(warpTid==0){printf(" Source: %d, len: %d\n",source,NL);}
 		//#endif
 		if((NL==0) || (NL>8000)){	
 			if(warpTid==0){sourceIndex=atomicAdd(&S->candidate.start[0],1);}
@@ -87,6 +87,7 @@ check(Sampling *S, gpu_graph G,curandState *global_state,int n_subgraph, int Fro
 		sourceIndex= __shfl_sync(0xffffffff,sourceIndex,0);
 		__syncwarp(); 
 	}
+	printf("Thread %d has finished.",tid);
 	if(tid==0){printf("%d,",S->sampled_count[0]);}
 }
 
