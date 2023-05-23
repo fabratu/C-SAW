@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     int total_GPU = atoi(argv[10]);
     
     //MPI_Status status;
-    int myrank;
+    int myrank = 0;
     double global_max_time, global_min_time;
     int global_sampled_edges;
     struct arguments args;
