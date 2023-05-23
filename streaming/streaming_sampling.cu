@@ -432,6 +432,12 @@ struct arguments Sampler(char beg[100], char csr[100], int n_blocks,
   //n_child, depth, each_subgraph, queue_size
   // cout<<"\nblocks:"<<n_blocks<<"\tThreads:"<<n_threads<<"\tSubgraphs:"<<n_subgraph<<"\n";
   // int n_threads=32;
+
+  int deviceCount;
+  HRR(cudaGetDeviceCount(&deviceCount));
+  printf("My rank: %d, totaldevice: %d\n", rank,deviceCount);
+  HRR(cudaSetDevice(rank%deviceCount));
+
   int *total = (int *)malloc(sizeof(int) * n_subgraph);
   int len = 5;
   int T_Group = n_threads / 32;
@@ -493,10 +499,7 @@ struct arguments Sampler(char beg[100], char csr[100], int n_blocks,
   cudaOccupancyMaxActiveBlocksPerMultiprocessor(&numBlocks, check, n_threads,
                                                 0);
 
-  int deviceCount;
-  HRR(cudaGetDeviceCount(&deviceCount));
-  printf("My rank: %d, totaldevice: %d\n", rank,deviceCount);
-  HRR(cudaSetDevice(rank%deviceCount));
+
   // cout<<"Max allocatable Blocks:"<<numBlocks<<"\n";
   int *d_node_list;
   int *d_edge_list;
