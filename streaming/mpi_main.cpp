@@ -41,11 +41,11 @@ int main(int argc, char *argv[])
     // MPI_Reduce(&args.time, &global_min_time, 1, MPI_DOUBLE,MPI_MIN, 0, MPI_COMM_WORLD);
     // float rate = global_sampled_edges/global_max_time/1000000;
     float rate = args.sampled_edges/args.time/1000000;
-    if(myrank==0)
-    {
+    // if(myrank==0)
+    // {
         // printf("%s,%f,%f\n",argv[1],global_min_time,global_max_time);
         printf("%s,%f,%f\n",argv[1],args.sampled_edges,args.time);
-    }
+    // }
     // MPI_Finalize();
    return 0;
 }
