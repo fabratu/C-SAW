@@ -289,7 +289,6 @@ struct arguments Sampler(char beg[100], char csr[100],int n_blocks, int n_thread
 	int total_count=0;
 	for(int i=0; i < n_subgraph;i++){
 		int count= S.samples[i].start[0];
-		printf("Sampled: %d\n",host_counter[0]);
 		total_count+=count;
 	}
 	total_time= wtime()-start_time;
@@ -298,8 +297,9 @@ struct arguments Sampler(char beg[100], char csr[100],int n_blocks, int n_thread
 	/*
 	 	The sampled graph is stored as edge list. To get the samples in the CPU memory, copy each array from class Si to CPU allocated memory.
 	 */
-	printf("Sampled edges:%d\n",host_counter[0]);	
-	args.sampled_edges=host_counter[0];
+	//printf("Sampled edges:%d\n",host_counter[0]);	
+	args.sampled_edges = 0;
+	//args.sampled_edges=host_counter[0];
 	args.time=total_time; 
 	return args;
 }
