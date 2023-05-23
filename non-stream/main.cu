@@ -276,7 +276,8 @@ struct arguments Sampler(char beg[100], char csr[100],int n_blocks, int n_thread
 	double start_time,total_time;
 	start_time= wtime();
 	if(FrontierSize==1){
-	check<<<n_blocks, n_threads>>>(sampler, ggraph, d_state, n_subgraph, FrontierSize, NeighborSize, Depth);
+		check<<<n_blocks, n_threads>>>(sampler, ggraph, d_state, n_subgraph, FrontierSize, NeighborSize, Depth);
+		printf("Can I reach this line?");
 	}
 	else{
 		printf("Layer call\n");
