@@ -288,7 +288,7 @@ struct arguments Sampler(char beg[100], char csr[100],int n_blocks, int n_thread
 	int total_count=0;
 	for(int i=0; i < n_subgraph;i++){
 		int count= S.samples[i].start[0];
-	printf("Sampled: %d\n",host_counter[0]);
+		printf("Sampled: %d\n",host_counter[0]);
 		total_count+=count;
 	}
 	total_time= wtime()-start_time;
