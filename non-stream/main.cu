@@ -24,14 +24,14 @@ check(Sampling *S, gpu_graph G,curandState *global_state,int n_subgraph, int Fro
 	float prefix_time,local_d_time,global_d_time;
 	int tid = threadIdx.x + blockIdx.x * blockDim.x;
 	int hash=1, cache=0, bitflag=1, NORMALIZE=1;
-	#ifdef profile
+	//#ifdef profile
 	if(tid==0){
 		printf("\n");
 		for(int i=0; i<n_subgraph;i++)
 		{
 			S->candidate.vertices[i];
 		}}
-	#endif
+	//#endif
 	__syncwarp();
 	int warpId = tid/32;
 	int warpTid=threadIdx.x%32;
@@ -49,9 +49,9 @@ check(Sampling *S, gpu_graph G,curandState *global_state,int n_subgraph, int Fro
 	// sourceIndex= __shfl_sync(0xffffffff,sourceIndex,0);
 	__syncwarp();
 
-	#ifdef profile
-	// if(threadIdx.x==0){printf("warpID:%d, sourceIndex:%d,start: %d\n",warpId, sourceIndex, S->candidate.start[0]);}
-	#endif
+	//#ifdef profile
+	if(threadIdx.x==0){printf("warpID:%d, sourceIndex:%d,start: %d\n",warpId, sourceIndex, S->candidate.start[0]);}
+	//#endif
 	// start loop
 	S->candidate.end[0]= n_subgraph;
 	// clock_t start = clock();
@@ -61,9 +61,9 @@ check(Sampling *S, gpu_graph G,curandState *global_state,int n_subgraph, int Fro
 		source= S->candidate.vertices[sourceIndex];
 		int SampleID= S->candidate.instance_ID[sourceIndex];
 		int NL= G.degree_list[source];
-		#ifdef profile
-		// if(warpTid==0){printf(" Source: %d, len: %d\n",source,NL);}
-		#endif
+		//#ifdef profile
+		if(warpTid==0){printf(" Source: %d, len: %d\n",source,NL);}
+		//#endif
 		if((NL==0) || (NL>8000)){	
 			if(warpTid==0){sourceIndex=atomicAdd(&S->candidate.start[0],1);}
 			sourceIndex= __shfl_sync(0xffffffff,sourceIndex,0);
