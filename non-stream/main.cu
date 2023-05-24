@@ -57,6 +57,7 @@ check(Sampling *S, gpu_graph G,curandState *global_state,int n_subgraph, int Fro
 	// clock_t start = clock();
 	while(sourceIndex < S->candidate.end[0])
 	{
+		printf("thread: %d sIndex: %d end: %d\n",tid, sourceIndex, S->candidate.end[0]);
 		int VertCount=1;
 		source= S->candidate.vertices[sourceIndex];
 		int SampleID= S->candidate.instance_ID[sourceIndex];
