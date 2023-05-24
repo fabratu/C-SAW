@@ -87,7 +87,7 @@ check(Sampling *S, gpu_graph G,curandState *global_state,int n_subgraph, int Fro
 		sourceIndex= __shfl_sync(0xffffffff,sourceIndex,0);
 		__syncwarp(); 
 	}
-	printf("Thread %d has finished.",tid);
+	printf("Thread %d has finished.\n",tid);
 	//if(tid==0){printf("%d,",S->sampled_count[0]);}
 }
 
