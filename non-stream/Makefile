@@ -5,7 +5,7 @@ cucc= "$(shell which nvcc)"
 cc= "$(shell which mpicxx)"
 commflags=-lcudart -L"$(shell dirname $(cucc))"/../lib64
 cuflags= --compiler-options -v -Xcudafe  -\# --resource-usage 
-cuflags+= -std=c++11
+cuflags+= -std=c++11 -lineinfo
 objs	= $(patsubst %.cu,%.o,$(wildcard *.cu)) \
 	$(patsubst %.cpp,%.o,$(wildcard *.cpp))
 

@@ -985,10 +985,10 @@ frontier(gpu_graph *G,Sampling *S, int warpId,int SampleID, int N, int source, i
         int pos=atomicAdd(&S->samples[SampleID].start[0],1);
         // total count
         atomicAdd(&S->sampled_count[0],1); 
-        #ifdef profile
+        //#ifdef profile
         
-        // printf("Added to sampled.\n SID: %d, Updated: %d, pos: %d, is_in: %d\n",SampleID,vertex,pos,is_in);
-        #endif
+        printf("Added to sampled.\n SID: %d, Updated: %d, pos: %d, is_in: %d\n",SampleID,vertex,pos,is_in);
+        //#endif
 		S->samples[SampleID].vertex[pos]=source;
         S->samples[SampleID].edge[pos]=vertex;
 		if(is_in==0)
