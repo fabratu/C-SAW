@@ -53,7 +53,7 @@ check(Sampling *S, gpu_graph G,curandState *global_state,int n_subgraph, int Fro
 	if(threadIdx.x==0){printf("warpID:%d, sourceIndex:%d,start: %d\n",warpId, sourceIndex, S->candidate.start[0]);}
 	//#endif
 	// start loop
-	S->candidate.end[0]= n_subgraph;
+	S->candidate.end[0]= n_subgraph - 1;
 	// clock_t start = clock();
 	while(sourceIndex < S->candidate.end[0])
 	{
