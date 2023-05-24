@@ -5,18 +5,18 @@ __device__ int
 VertexBias(int vertexID, gpu_graph *graph)
 { 
     // For MDRW
-    return graph->degree_list[vertexID];
+    //return graph->degree_list[vertexID];
     // For other
-    // return 1;
+    return 1;
 }
 
 __device__ int
 EdgeBias(int vertexID, gpu_graph *graph)
 {
     // For BNS, LS
-    return graph->degree_list[vertexID];
+    //return graph->degree_list[vertexID];
     // For BRW, 
-    // return 1;
+    return 1;
 }
 
 
